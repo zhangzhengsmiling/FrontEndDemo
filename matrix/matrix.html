@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<meta name="Author" content="">
+	<meta name="KeyWords" content="">
+	<title>Matrix</title>
+	<style type="text/css">
+		html, body {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#canvas{
+			background-color: #000;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+
+	<script type="text/javascript">
+		var canvas=document.getElementById("canvas");
+		var ctx=canvas.getContext("2d");
+		var screen=window.screen;
+		var width=screen.width;
+		var height=screen.height;
+		var str;
+		canvas.width=screen.width;
+		canvas.height=screen.height;
+		var fontSize=14;
+		var cols=width/fontSize;
+		var row=height/fontSize;
+		var red,green,blue;
+		ctx.font="200 14px 华文行楷";//设置文字样式 参数表：加粗 文字大小 字体
+
+		//字符的渐变效果
+		//用一个透明的矩阵覆盖循环整个界面
+		//最后添加的文字尚未覆盖，而最先添加的文字多次覆盖直至消失
+		function fade(){
+			ctx.fillStyle="rgba(0,0,0,0.08)";
+			ctx.fillRect(0,0,width,height);
+		}
+
+		var y=[];
+		//y的初始化
+		for(var i=0;i<cols;i++){
+			y[i]=0;
+		}
+
+		//字符的流动
+		function flow(){
+			ctx.fillStyle="rgba(0,255,0,1.0)";
+			for(var i=0;i<cols;i++){
+				str=String.fromCharCode(47+Math.ceil(Math.random()*10));
+				ctx.fillText(str,i*fontSize,y[i]);
+				y[i]+=fontSize;
+				if(y[i]>height+Math.ceil(Math.random()*height)){
+					y[i]=0;
+				}
+			}
+			fade();
+		}
+		setInterval(flow,50);
+	</script>
+
+</body>
+</html>

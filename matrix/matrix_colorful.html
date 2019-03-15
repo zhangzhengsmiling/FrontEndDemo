@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="Author" content="">
+	<meta name="Keywords" content="">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<title>Matrix</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#canvas{
+			background-color: #000;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+
+	<script type="text/javascript">
+		var canvas=document.getElementById("canvas");
+		var ctx=canvas.getContext("2d");
+		var screen=window.screen;
+		var width=screen.width;
+		var height=screen.height;
+		var str;
+		canvas.width=screen.width;
+		canvas.height=screen.height;
+		var fontSize=14;
+		var cols=width/fontSize;
+		var row=height/fontSize;
+		var red,green,blue;
+		ctx.font="200 14px 华文行楷";//设置文字样式 参数表：加粗 文字大小 字体
+		function randomColor(){
+			red=Math.random()*256;
+			green=Math.random()*256;
+			blue=Math.random()*256;
+		}
+
+		function fade(){
+			ctx.fillStyle="rgba(0,0,0,0.08)";
+			ctx.fillRect(0,0,width,height);
+		}
+		var y=[];
+		for(var i=0;i<cols;i++){
+			y[i]=0;
+		}
+
+		function flow(){
+			for(var i=0;i<cols;i++){
+				randomColor();
+				ctx.fillStyle="rgb("+red+","+green+","+blue+")";
+				str=String.fromCharCode(47+Math.ceil(Math.random()*10));
+				ctx.fillText(str,i*fontSize,y[i]);
+				y[i]+=fontSize;
+				if(y[i]>height+Math.ceil(Math.random()*height)){
+					y[i]=0;
+				}
+			}
+			fade();
+		}
+		setInterval(flow,50);
+	</script>
+</body>
+</html>
