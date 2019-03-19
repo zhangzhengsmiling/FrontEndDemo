@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>立方体</title>
+</head>
+
+<style>
+	*{
+		margin:0;
+		padding:0;
+	}
+
+	.wrapper{
+		background: gray;
+		width: 400px;
+		height: 400px;
+		border:1px solid;
+		margin:200px auto;
+		perspective: 1000px;
+		/*transform-style: preserve-3d;*/
+
+	}
+
+	.cube{
+		width: 150px;
+		height: 150px;
+		margin:150px auto;
+		border:1px solid;
+		transition: all 300s linear;
+		transform-style: preserve-3d;
+	}
+
+	.cube >div{
+		position: absolute;
+		width: 150px;
+		height:150px;
+		border:1px solid black;
+		background: #0ff;
+		text-align: center;
+		font:50px/150px "微软雅黑";
+		box-sizing:border-box;
+		opacity: 0.6;
+		/*backface-visibility: hidden;*/
+
+	}
+
+	.wrapper:hover .cube{
+		transform-origin:center center center; 
+		transform: rotate3d(1 , 1 , 1 , 36000deg);
+
+	}
+
+	.top{
+		transform-origin: bottom center;
+		transform: translateY(-150px) rotate3d(1 , 0 , 0 , 90deg);
+	}
+
+	.left{
+		transform-origin: right center;
+		transform:translateX(-150px) rotate3d(0 , 1 , 0 , -90deg);
+	}
+	.bottom{
+		transform-origin: top center;
+		transform:translateY(150px) rotate3d(1 , 0 , 0 , -90deg);
+	}
+	.right{
+		transform-origin: left center;
+		transform: translateX(150px) rotate3d(0 , 1 , 0 , 90deg); 
+	}
+	.back{
+		transform: translateZ(-150px) rotate3d( 1 , 0 , 0 , 180deg);
+	}
+
+
+</style>
+<body>
+	
+
+	<div class="wrapper">
+		<div class="cube">
+			<div class="top">1</div>
+			<div class="bottom">5</div>
+			<div class="left">3</div>
+			<div class="right">4</div>
+			<div class="front">2</div>
+			<div class="back">6</div>
+		</div>
+	</div>
+</body>
+</html>
